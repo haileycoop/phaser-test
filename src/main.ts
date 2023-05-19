@@ -14,14 +14,18 @@ class GameScene extends Scene {
     this.box = this.add.rectangle(200, 200, 100, 100, 0xff0000);
     this.box.setStrokeStyle(4, 0x000000);
     this.box.setOrigin(0.5, 0.5);
+    this.box.setInteractive();
+    this.input.setDraggable(this.box, true);
+    this.input.on('drag', this.handleDrag, this);
   }
 
-  update(time: number, delta: number) {
-    if (!this.box) {
-      return;
+  handleDrag(pointer: Phaser.Input.Pointer, gameObject: GameObjects.GameObject, dragX: number, dragY: number) {
+      gameObject.setPosition(dragX, dragY);
     }
 
-    this.box.rotation += 0.0005 * delta;
+  update() {
+    
+
   }
 }
 
