@@ -20,7 +20,9 @@ class GameScene extends Scene {
   }
 
   handleDrag(pointer: Phaser.Input.Pointer, gameObject: GameObjects.GameObject, dragX: number, dragY: number) {
-      gameObject.setPosition(dragX, dragY);
+      if (gameObject instanceof Phaser.GameObjects.Rectangle) {
+        gameObject.setPosition(dragX, dragY);
+      }
     }
 
   update() {
