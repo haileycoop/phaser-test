@@ -25,15 +25,16 @@ client.joinOrCreate("game_room").then((roomInstance: Colyseus.Room<unknown>) => 
     });
     // Receive messages from server
     room.onMessage("message_type", (message) => {
-      console.log(client.id, "received on", room.name, message);
+      console.log(roomInstance.sessionId, "received on", room.name, message);
     });
     // Handle room errors
     room.onError((code, message) => {
-      console.log(client.id, "couldn't join", room.name);
+      console.log(roomInstance.sessionId, "couldn't join", room.name);
+      console.error("Error:", message, " | Code: ", code); // Log the error message from the server
     });
     // Client left room
     room.onLeave((code) => {
-      console.log(client.id, "left", room.name);
+      console.log(roomInstance.sessionId, "left", room.name, " | Code: ", code);
     });
   
     // Access the Colyseus room instance within the GameScene
