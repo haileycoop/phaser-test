@@ -3,7 +3,7 @@ import { Scene, Game, GameObjects } from 'phaser';
 import * as Colyseus from "colyseus.js";
 
 // Connect to the local colyseus server
-const client = new Colyseus.Client('ws://localhost:2567');
+const client = new Colyseus.Client('ws://localhost:4444');
 
 // Set up the canvas on which the game will be rendered
 const canvas = document.getElementById('game') as HTMLCanvasElement;
@@ -19,7 +19,7 @@ client.joinOrCreate("game_room").then((roomInstance: Colyseus.Room<unknown>) => 
     room = roomInstance;
     
     // Handle room events
-    // Room state update
+    // // Room state update
     room.onStateChange((state) => {
       console.log(room.name, "has new state:", state);
     });
@@ -77,14 +77,14 @@ class GameScene extends Scene {
         gameObject.setPosition(dragX, dragY);
 
         // Log the pointer object
-        console.log("Pointer:", pointer);
+        // console.log("Pointer:", pointer);
       }
     }
 
   update() {
-     if (room) {
-      console.log(room.name, "has new state:", room.state);
-    }   
+    //  if (room) {
+    //   console.log(room.name, "has new state:", room.state);
+    // }   
   }
 }
 

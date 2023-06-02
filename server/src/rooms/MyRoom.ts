@@ -7,6 +7,8 @@ export class MyRoom extends Room<MyRoomState> {
 
   onCreate (options: any) {
     this.setState(new MyRoomState());
+    this.state.roomName = "game_room";
+    console.log(this.state.roomName, this.roomId, "creating...");
 
     this.onMessage("updateBoxPosition", (client, position) => {
       this.boxPosition.set(client.sessionId, position);
