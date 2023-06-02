@@ -3,7 +3,7 @@ import { Scene, Game, GameObjects } from 'phaser';
 import * as Colyseus from "colyseus.js";
 
 // Connect to the local colyseus server
-const client = new Colyseus.Client('ws://localhost:4444');
+const client = new Colyseus.Client('ws://localhost:4445');
 
 // Set up the canvas on which the game will be rendered
 const canvas = document.getElementById('game') as HTMLCanvasElement;
@@ -64,27 +64,39 @@ class GameScene extends Scene {
     this.box.setOrigin(0.5, 0.5);
     this.box.setInteractive();
     this.input.setDraggable(this.box, true);
-    this.input.on('drag', this.handleDrag, this);
 
     // Logging a message using the room instance
     if (this.room) {
       console.log("Connected to room:", this.room.name);
     }
+
+    // Bind the handleDrag function to the correct context
+    this.handleDrag = this.handleDrag.bind(this);
+
+    // Add the drag event listener
+    this.input.on('drag', this.handleDrag);
+
   }
 
   handleDrag(pointer: Phaser.Input.Pointer, gameObject: GameObjects.GameObject, dragX: number, dragY: number) {
-      if (gameObject instanceof Phaser.GameObjects.Rectangle) {
+    if (gameObject instanceof Phaser.GameObjects.Rectangle) {
+        
         gameObject.setPosition(dragX, dragY);
 
-        // Log the pointer object
-        // console.log("Pointer:", pointer);
+        console.log("this.room:", this.room); // Add this line
+
+        // Send the updated box position to the server
+      if (this.room) {
+          console.log("handleDrag method called!");
+          const position = { x: dragX, y: dragY };
+          this.room.send("updateBoxPosition", position);
+          console.log("Sent box position to server:", position);
+        }
       }
-    }
+  }
 
   update() {
-    //  if (room) {
-    //   console.log(room.name, "has new state:", room.state);
-    // }   
+    
   }
 }
 

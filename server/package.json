@@ -8,7 +8,7 @@
     "node": ">= 16.13.0"
   },
   "scripts": {
-    "start": "PORT=4444 tsx watch src/index.ts",
+    "start": "PORT=4445 tsx watch src/index.ts",
     "loadtest": "tsx loadtest/example.ts --room my_room --numClients 2",
     "build": "npm run clean && tsc",
     "clean": "rimraf build",

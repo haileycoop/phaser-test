@@ -1,9 +1,8 @@
 import { Room, Client } from "@colyseus/core";
-import { type, MapSchema } from "@colyseus/schema";
-import { MyRoomState } from "./schema/MyRoomState";
+import { type } from "@colyseus/schema";
+import { MyRoomState, MyPosition } from "./schema/MyRoomState";
 
 export class MyRoom extends Room<MyRoomState> {
-  @type({ map: "number" }) boxPosition: MapSchema<number> = new MapSchema<number>();
 
   onCreate (options: any) {
     this.setState(new MyRoomState());
@@ -11,16 +10,17 @@ export class MyRoom extends Room<MyRoomState> {
     console.log(this.state.roomName, this.roomId, "creating...");
 
     this.onMessage("updateBoxPosition", (client, position) => {
-      this.boxPosition.set(client.sessionId, position);
+      console.log("Received box position from client:", client.sessionId, position);
     });
+
   }
 
   onJoin (client: Client, options: any) {
     console.log(client.sessionId, "joined!");
 
     // Send the initial box position to the joined client
-    if (this.boxPosition.size > 0) {
-      this.send(client, "updateBoxPosition", Array.from(this.boxPosition.entries()));
+    if (this.state.boxPosition.size > 0) {
+      this.send(client, "updateBoxPosition", Array.from(this.state.boxPosition.entries()));
     }
   }
 
