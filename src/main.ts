@@ -45,9 +45,9 @@ class GameScene extends Scene {
         
         gameObject.setPosition(dragX, dragY);
 
-        console.log("this.room:", this.room); // Add this line
+        console.log("this.room:", this.room);
 
-        // Send the updated box position to the server
+      // Send the updated box position to the server
       if (this.room) {
           const position = { x: dragX, y: dragY };
           this.room.send("updateBoxPosition", position);

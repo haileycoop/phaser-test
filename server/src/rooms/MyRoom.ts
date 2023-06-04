@@ -1,6 +1,5 @@
 import { Room, Client } from "@colyseus/core";
-import { type } from "@colyseus/schema";
-import { MyRoomState, MyPosition } from "./schema/MyRoomState";
+import { MyRoomState } from "./schema/MyRoomState";
 
 export class MyRoom extends Room<MyRoomState> {
 
