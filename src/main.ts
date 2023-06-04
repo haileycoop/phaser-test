@@ -35,7 +35,7 @@ class GameScene extends Scene {
         // Listen for changes in the room state
         this.room.onStateChange((state) => {
             // state.boxPosition is the new position of the box
-            console.log("New state received:", state);
+            // console.log("New state received:", state);
             if (this.box) {
                 // If we have a box, update its position to the one received from the server
                 this.box.setPosition(state.boxPosition.x, state.boxPosition.y);
@@ -60,13 +60,13 @@ class GameScene extends Scene {
         
         gameObject.setPosition(dragX, dragY);
 
-        console.log("this.room:", this.room);
+        // console.log("this.room:", this.room);
 
       // Send the updated box position to the server
       if (this.room) {
           const position = { x: dragX, y: dragY };
           this.room.send("updateBoxPosition", position);
-          console.log("Sent box position to server:", position);
+          // console.log("Sent box position to server:", position);
         }
       }
   }
@@ -86,6 +86,9 @@ const config = {
       gravity: { y: 0 },
       // debug: true
     }
+  },
+  audio: {
+    noAudio: true
   },
   scene: [
     GameScene

@@ -5,6 +5,11 @@ export class MyRoom extends Room<MyRoomState> {
 
   onCreate (options: any) {
     this.setState(new MyRoomState());
+
+    // Set the initial box position
+    this.state.boxPosition.x = 200;
+    this.state.boxPosition.y = 200;
+
     this.state.roomName = "game_room";
     console.log(this.state.roomName, this.roomId, "creating...");
 
@@ -21,7 +26,7 @@ export class MyRoom extends Room<MyRoomState> {
     console.log(client.sessionId, "joined!");
 
     // Send the initial box position to the joined client
-    client.send("updateBoxPosition", this.state.boxPosition);
+    // client.send("updateBoxPosition", this.state.boxPosition);
   }
 
   onLeave (client: Client, consented: boolean) {
