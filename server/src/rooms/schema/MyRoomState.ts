@@ -1,4 +1,4 @@
-import { Schema, MapSchema, type } from "@colyseus/schema";
+import { Schema, type } from "@colyseus/schema";
 
 // Define a custom schema for the box position
 export class MyPosition extends Schema {
@@ -9,7 +9,7 @@ export class MyPosition extends Schema {
 export class MyRoomState extends Schema {
 
   @type("string") roomName: string = ""; // Add the roomName property
-  @type({ map: MyPosition }) boxPosition: MapSchema<MyPosition> = new MapSchema<MyPosition>();
+  @type(MyPosition) boxPosition: MyPosition = new MyPosition();
 
 }
 

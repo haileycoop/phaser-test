@@ -2,6 +2,11 @@ import './style.css'
 import { Scene, Game, GameObjects } from 'phaser';
 import * as Colyseus from "colyseus.js";
 
+type RoomState = {
+  boxPosition: { x: number; y: number; };
+  // Include other properties of the room state here...
+};
+
 // Connect to the local colyseus server
 const client = new Colyseus.Client('ws://localhost:4445');
 
@@ -10,11 +15,10 @@ const canvas = document.getElementById('game') as HTMLCanvasElement;
 
 class GameScene extends Scene {
   private box: GameObjects.Rectangle | undefined;
-  private room: Colyseus.Room<unknown> | undefined; // Add a property to hold the Colyseus room instance
+  private room: Colyseus.Room<RoomState> | undefined; // Add a property to hold the Colyseus room instance
 
   constructor(room: Colyseus.Room<unknown>) {
     super('scene-game');
-    this.room = room; // Store the Colyseus room instance
   }
 
   create() {
@@ -25,8 +29,19 @@ class GameScene extends Scene {
     this.box.setInteractive();
 
     // Start connecting to the room
-    client.joinOrCreate("game_room").then((roomInstance: Colyseus.Room<unknown>) => {
+    client.joinOrCreate<RoomState>("game_room").then((roomInstance: Colyseus.Room<RoomState>) => {
         this.room = roomInstance;
+      
+        // Listen for changes in the room state
+        this.room.onStateChange((state) => {
+            // state.boxPosition is the new position of the box
+            console.log("New state received:", state);
+            if (this.box) {
+                // If we have a box, update its position to the one received from the server
+                this.box.setPosition(state.boxPosition.x, state.boxPosition.y);
+            }
+        });
+
         // Make the box draggable now that the room is ready
         if (this.box) {
             this.input.setDraggable(this.box, true);

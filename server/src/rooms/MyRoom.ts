@@ -9,7 +9,10 @@ export class MyRoom extends Room<MyRoomState> {
     console.log(this.state.roomName, this.roomId, "creating...");
 
     this.onMessage("updateBoxPosition", (client, position) => {
-      console.log("Received box position from client:", client.sessionId, position);
+      // console.log("Received box position from client:", client.sessionId, position);
+      // Update the box position in the room state
+      this.state.boxPosition.x = position.x;
+      this.state.boxPosition.y = position.y;
     });
 
   }
@@ -18,9 +21,7 @@ export class MyRoom extends Room<MyRoomState> {
     console.log(client.sessionId, "joined!");
 
     // Send the initial box position to the joined client
-    if (this.state.boxPosition.size > 0) {
-      this.send(client, "updateBoxPosition", Array.from(this.state.boxPosition.entries()));
-    }
+    client.send("updateBoxPosition", this.state.boxPosition);
   }
 
   onLeave (client: Client, consented: boolean) {
