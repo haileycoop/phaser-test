@@ -17,7 +17,7 @@ class GameScene extends Scene {
   private box: GameObjects.Rectangle | undefined;
   private room: Colyseus.Room<RoomState> | undefined; // Add a property to hold the Colyseus room instance
 
-  constructor(room: Colyseus.Room<unknown>) {
+  constructor(_room: Colyseus.Room<unknown>) {
     super('scene-game');
   }
 
@@ -55,7 +55,7 @@ class GameScene extends Scene {
     });
   }
 
-  handleDrag(pointer: Phaser.Input.Pointer, gameObject: GameObjects.GameObject, dragX: number, dragY: number) {
+  handleDrag(_pointer: Phaser.Input.Pointer, gameObject: GameObjects.GameObject, dragX: number, dragY: number) {
     if (gameObject instanceof Phaser.GameObjects.Rectangle) {
         
         gameObject.setPosition(dragX, dragY);
