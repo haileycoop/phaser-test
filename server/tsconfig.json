@@ -14,8 +14,12 @@
       "allowJs": true,
       "strictNullChecks": false,
       "forceConsistentCasingInFileNames": true,
-      "useDefineForClassFields": false
+      "useDefineForClassFields": false,
+      "skipLibCheck": true
   },
+  "exclude": [
+    "node_modules"
+  ],
   "include": [
     "src"
   ]
