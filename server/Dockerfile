@@ -4,7 +4,7 @@ ENV PORT 8080
 
 WORKDIR /app
 
-COPY . .
+COPY build/ .
 
 EXPOSE 8080
 
