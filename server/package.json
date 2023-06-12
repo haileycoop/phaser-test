@@ -5,7 +5,7 @@
   "description": "npm init template for bootstrapping an empty Colyseus project",
   "main": "build/index.js",
   "engines": {
-    "node": ">= 16.13.0"
+    "node": "18.16.0"
   },
   "scripts": {
     "start": "PORT=4445 tsx watch src/index.ts",
