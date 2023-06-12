@@ -29,3 +29,6 @@ dist-ssr
 # .env files inside server folder
 server/*.env
 server/**/*.env
+
+# build folder inside server folder
+server/build

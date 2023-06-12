@@ -8,9 +8,11 @@
     "node": "18.16.0"
   },
   "scripts": {
-    "start": "PORT=4445 tsx watch src/index.ts",
+    "start": "tsx watch src/index.ts",
     "loadtest": "tsx loadtest/example.ts --room my_room --numClients 2",
     "build": "npm run clean && tsc",
+    "postbuild-unix": "cp package.json build/package.json && cd build && npm install --only=production",
+    "postbuild-windows": "copy .\\package.json build\\package.json && cd .\\build && npm install --only=production",
     "clean": "rimraf build",
     "test": "mocha -r tsx test/**_test.ts --exit --timeout 15000"
   },
