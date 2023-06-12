@@ -8,7 +8,7 @@ type RoomState = {
 };
 
 // Connect to the local colyseus server
-const client = new Colyseus.Client('ws://localhost:2567');
+const client = new Colyseus.Client(`ws://${import.meta.env.VITE_APP_SERVER_URL}:${import.meta.env.VITE_APP_SERVER_PORT}`);
 
 // Set up the canvas on which the game will be rendered
 const canvas = document.getElementById('game') as HTMLCanvasElement;

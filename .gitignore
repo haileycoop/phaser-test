@@ -26,7 +26,9 @@ dist-ssr
 # Local Netlify folder
 .netlify
 
-# .env files inside server folder
+# .env files for the client
+
+# .env files for the Colyseus server
 server/*.env
 server/**/*.env
 
