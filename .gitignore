@@ -27,7 +27,9 @@ dist-ssr
 .netlify
 
 # .env files for the client
-
+.env*
+.env.development
+.env.production
 
 # .env files for the Colyseus server
 server/*.env
