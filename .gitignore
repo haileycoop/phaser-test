@@ -28,6 +28,7 @@ dist-ssr
 
 # .env files for the client
 /*.env
+env.*
 
 # .env files for the Colyseus server
 server/*.env
