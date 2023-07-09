@@ -37,3 +37,9 @@ server/**/*.env
 
 # build folder inside server folder
 server/build
+
+# terraform
+server/terraform/.terraform*
+server/terraform/terraform.tfstate.d*
+server/terraform/.terraform.lock.hcl
+server/terraform/config.tfvars
